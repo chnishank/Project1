@@ -6,50 +6,48 @@
 
 
 Load the movies.csv,ratings.csv and tags.csv into local file system from git repo "https://github.com/chnishank/Project1"
-
+    Execute following command
+	git pull https://github.com/chnishank/Project1.git
 
 unizp the files
-
-Execute following commands
-unzip movies.csv
-unzip ratings.csv
-unzip tags.csv
+    Execute following commands
+        unzip movies.csv
+        unzip ratings.csv
+        unzip tags.csv
 
 
 copy movies.csv,ratings.csv and tags.csv into hdfs from local file system
-
-Execute following commands
-hdfs dfs -put movies.csv /user/maria_dev/P1/movies
-hdfs dfs -put ratings.csv /user/maria_dev/P1/ratings
-hdfs dfs -put tags.csv /user/maria_dev/P1/tags
+    Execute following commands
+        hdfs dfs -put movies.csv /user/maria_dev/P1/movies
+    	hdfs dfs -put ratings.csv /user/maria_dev/P1/ratings
+	hdfs dfs -put tags.csv /user/maria_dev/P1/tags
 
 
 start the Hive shell
+    Execute following command to start
+	hive
 
-Execute following command
-hive
+    Execute following commands to create database and tables
+	hive> create database P1;
+	hive> use P1
 
-Execute following commands to create database and tables
-hive> create database P1;
-hive> use P1
-
-hive> create external table movies(movieid int, title string, genres array< string >)                                                                                   
-    > row format delimited                                                                                                                                              
-    > fields terminated by ','                                                                                                                                          
-    > collection items terminated by '|'  
-    > location '/user/maria_dev/P1/movies';
+	hive> create external table movies(movieid int, title string, genres array< string >)                                                                                   
+    	    > row format delimited                                                                                                                                              
+            > fields terminated by ','                                                                                                                                          
+            > collection items terminated by '|'  
+            > location '/user/maria_dev/P1/movies';
 
  
-hive> create external table ratings(userid int, movieid int, rating float, tstamp string)                          
-    > row format delimited                                                                                                                                              
-    > fields terminated by ','                                                                                                                                          
-    > location '/user/maria_dev/P1/ratings'; 
+	hive> create external table ratings(userid int, movieid int, rating float, tstamp string)                          
+    	    > row format delimited                                                                                                                                              
+    	    > fields terminated by ','                                                                                                                                          
+    	    > location '/user/maria_dev/P1/ratings'; 
 
 
-hive> create external table tags(userid int, movieid int, tag float, tstamp string)                                                                                   
-    > row format delimited                                                                                                                                              
-    > fields terminated by ','                                                                                                                                          
-    > location '/user/maria_dev/P1/tags'; 
+	hive> create external table tags(userid int, movieid int, tag float, tstamp string)                                                                                   
+    	    > row format delimited                                                                                                                                              
+    	    > fields terminated by ','                                                                                                                                          
+    	    > location '/user/maria_dev/P1/tags'; 
 
 
 
