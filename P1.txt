@@ -186,17 +186,5 @@ hive> select m.title, count(r.movieid) as e from movies m, ratings r
 
 
 
-hive> create external table ratings(userid int, movieid int, rating float, tstamp string)                                                                                   
-    > partitioned by (rating float)   
-    > clustered by(movieid) into 10 buckets  
-    > row format delimited                                                                                                                                              
-    > fields terminated by ','                                                                                                                                          
-    > location '/user/maria_dev/P1/ratings'; 
-
-
-
-
-
-
 
 
