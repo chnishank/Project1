@@ -1,4 +1,38 @@
 
+
+
+
+------------------------------PROJECT 1--------------------------
+
+
+Load the movies.csv,ratings.csv and tags.csv into local file system from git repo "https://github.com/chnishank/Project1"
+
+
+unizp the files
+
+Execute following commands
+unzip movies.csv
+unzip ratings.csv
+unzip tags.csv
+
+
+copy movies.csv,ratings.csv and tags.csv into hdfs from local file system
+
+Execute following commands
+hdfs dfs -put movies.csv /user/maria_dev/P1/movies
+hdfs dfs -put ratings.csv /user/maria_dev/P1/ratings
+hdfs dfs -put tags.csv /user/maria_dev/P1/tags
+
+
+start the Hive shell
+
+Execute following command
+hive
+
+Execute following commands to create database and tables
+hive> create database P1;
+hive> use P1
+
 hive> create external table movies(movieid int, title string, genres array< string >)                                                                                   
     > row format delimited                                                                                                                                              
     > fields terminated by ','                                                                                                                                          
@@ -19,7 +53,9 @@ hive> create external table tags(userid int, movieid int, tag float, tstamp stri
 
 
 
-------------------------------PROJECT 1--------------------------
+------------------------------PROJECT 1 Exercise Queries--------------------------
+
+
 
 01. first 5 entries from movies table
 hive> select * from movies limit 5;
