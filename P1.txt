@@ -70,12 +70,10 @@ hive> select r.movieid, m.title, min(r.rating),max(rating),avg(rating) from rati
 
 
 04. minimum rating given to a movie
-hive> select min(rating) from ratings; 
 hive> select r.movieid, m.title, min(r.rating) as e from ratings r, movies m where m.movieid=r.movieid group by r.movieid,m.title having e=1 limit 10;
 
 
 05. maximum rating given to a movie
-hive> select max(rating) from ratings;
 hive> select r.movieid, m.title, max(r.rating) from ratings r, movies m where m.movieid=r.movieid group by r.movieid,m.title limit 10;
 
 
@@ -96,8 +94,7 @@ hive> create table no_null_tags AS select * from tags where movieid IS NOT NULL 
 
 
 09. filtering to get the list of drama movies
-hive> select title from movies where if(array_contains(genres,'Drama'),title,'avengerscaptain')=title limit 5;  
-hive> select title,genres from movies where if(array_contains(genres,'Drama'),title,'')=title limit 5; 
+hive> select title from movies where if(array_contains(genres,'Drama'),title,'')=title limit 5;  
 
 
 10. total number of drama movies
@@ -106,7 +103,6 @@ hive> select count(*) from movies where if(array_contains(genres,'Drama'),title,
 
 11. filtering to get the list of comedy movies
 hive> select title from movies where if(array_contains(genres,'Comedy'),title,'')=title limit 5; 
-hive> select title,genres from movies where if(array_contains(genres,'Comedy'),title,'')=title limit 5; 
 
 
 12. total no. of comedy movies
@@ -115,7 +111,6 @@ hive> select count(*) from movies where if(array_contains(genres,'Comedy'),title
 
 13. search movie id by tag search
 hive> select movieid from tags where tag='Disney' limit 5;  
-hive> select movieid,tag from tags where tag='Disney' limit 5;  
 
 
 14. displays first 5 data from ratings table
@@ -138,19 +133,11 @@ hive> with h_rate as (select movieid,avg(rating) as e from ratings group by movi
 
 18. total number of unique movie genres
 hive> select count(distinct g) from (select explode(genres) as g from movies) as e;  
-hive> select count(distinct g) from (select explode(split(genres,'\\|')) as g from newmovies) as e;
-  
+ 
 
 19. top 25 most rated movies
-hive> select m.title,avg(r.rating) as e from ratings r, movies m 
-    > where m.movieid=r.movieid 
-    > group by r.movieid,m.title 
-    > order by e desc limit 25;
-
-
 hive> select m.title, count(r.movieid) as e from movies m, ratings r                                                                                                    
     > where m.movieid=r.movieid group by r.movieid, m.title order by e desc limit 25;
-
 
 
 20. slicing out columns to display only title and genres columns from movies table
@@ -163,8 +150,6 @@ hive> select substr(split(title, ' \\(')[size(split(title, ' \\(')) -1 ],1,4) fr
 
 22. count how many times each of genres occur
 hive> select g,count(g) from (select explode(genres) as g from movies) as e group by g;  
-
-hive> select g,count(g) from (select explode(split(genres,'\\|')) as g from newmovies) as e group by g limit 5;
 
 
 23. Which movie received the highest number of ratings?
