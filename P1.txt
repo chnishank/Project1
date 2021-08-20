@@ -1,31 +1,44 @@
 
 
 
-
 ------------------------------PROJECT 1--------------------------
 
 
+Open Terminal or GitBash
+     Log in to the VM via SSH on localhost port 2222
+	Execute following command and Enter password as [maria_dev]
+	$ ssh maria_dev@sandbox-hdp.hortonworks.com -p 2222
+	maria_dev@sandbox-hdp.hortonworks.com's password:
+
+     If log in successfully something will be shown as below
+         [maria_dev@sandbox-hdp ~]$
+
 Load the movies.csv,ratings.csv and tags.csv into local file system from git repo "https://github.com/chnishank/Project1"
     Execute following command
-	git pull https://github.com/chnishank/Project1.git
+	[maria_dev@sandbox-hdp ~]$ git clone https://github.com/chnishank/Project1.git
 
 unizp the files
     Execute following commands
-        unzip movies.csv
-        unzip ratings.csv
-        unzip tags.csv
+        [maria_dev@sandbox-hdp ~]$ cd Project1
+	[maria_dev@sandbox-hdp Project1]$ unzip movies.csv
+        [maria_dev@sandbox-hdp Project1]$ unzip ratings.csv
+        [maria_dev@sandbox-hdp Project1]$ unzip tags.csv
 
 
 copy movies.csv,ratings.csv and tags.csv into hdfs from local file system
     Execute following commands
-        hdfs dfs -put movies.csv /user/maria_dev/P1/movies
-    	hdfs dfs -put ratings.csv /user/maria_dev/P1/ratings
-	hdfs dfs -put tags.csv /user/maria_dev/P1/tags
+	[maria_dev@sandbox-hdp Project1]$ hdfs dfs -mkdir /user/maria_dev/P1
+	[maria_dev@sandbox-hdp Project1]$ hdfs dfs -mkdir /user/maria_dev/P1/movies
+	[maria_dev@sandbox-hdp Project1]$ hdfs dfs -mkdir /user/maria_dev/P1/ratings
+	[maria_dev@sandbox-hdp Project1]$ hdfs dfs -mkdir /user/maria_dev/P1/tags
+        [maria_dev@sandbox-hdp Project1]$ hdfs dfs -put movies.csv /user/maria_dev/P1/movies
+    	[maria_dev@sandbox-hdp Project1]$ hdfs dfs -put ratings.csv /user/maria_dev/P1/ratings
+	[maria_dev@sandbox-hdp Project1]$ hdfs dfs -put tags.csv /user/maria_dev/P1/tags
 
 
 start the Hive shell
     Execute following command to start
-	hive
+	[maria_dev@sandbox-hdp ~]$ hive
 
     Execute following commands to create database and tables
 	hive> create database P1;
@@ -48,6 +61,7 @@ start the Hive shell
     	    > row format delimited                                                                                                                                              
     	    > fields terminated by ','                                                                                                                                          
     	    > location '/user/maria_dev/P1/tags'; 
+
 
 
 
